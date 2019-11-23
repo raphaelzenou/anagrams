@@ -1,0 +1,16 @@
+app: anagrams-app
+org: raphaelzenou
+service: anagrams-app
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+stage: dev
+
+functions:
+  hello:
+    handler: handler.home
+    events:
+    - http:
+        path: /
+        method: get
