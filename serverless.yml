@@ -4,13 +4,37 @@ service: anagrams-app
 provider:
   name: aws
   runtime: nodejs12.x
+  stage: dev
 
-stage: dev
+plugins:
+  - serverless-offline
+package:
+  include: 
+    - handlers/**
+    - models/**
 
 functions:
-  hello:
-    handler: handler.home
+  statistics:
+    handler: handlers/read.statistics
     events:
     - http:
-        path: /
+        path: statistics/{userId}
+        method: get
+        request: 
+          parameters: 
+            paths: 
+              userId: true
+
+  validate:
+    handler: handlers/create.validate
+    events:
+    - http:
+        path: validate
+        method: post
+
+  generate:
+    handler: handlers/random.generate
+    events:
+    - http:
+        path: generate
         method: get

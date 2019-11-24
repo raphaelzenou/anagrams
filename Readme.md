@@ -97,7 +97,7 @@ Part 2 of this Readme file will be dedicated to this API documentation.
 
 ## Technologies Used
 
-- [Javascript](ES6)
+- [Javascript ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript)
     - The project uses **Javacript** as its unique programming language
 - [Node.js](https://nodejs.org/)
     - The project uses **Node.js** as its server side Javascript execution environement (backend)
@@ -105,8 +105,16 @@ Part 2 of this Readme file will be dedicated to this API documentation.
 - [Serverless Framework](https://serverless.com/)
     - The project uses **Serverless** that simplifies AWS serverless Lambda functions setup
     - version 1.58.0
+- [Serverless Offline](https://github.com/dherault/serverless-offline)
+    - The project uses **Serverless** that emulates AWS λ our local machine to speed up development
 - [AWS Lambda](https://aws.amazon.com/lambda/)
     - The project uses **AWS Lambda** as its serverless application development cloud solution
+- [AWS RDS](https://aws.amazon.com/rds/)
+    - The project uses **AWS Lambda** as its cloud based MySQL relational database 
+- [Sequelize](https://sequelize.org/)
+    - The project uses **Sequelize** as its ORM for its MySQL database
+
+
 
 ## Testing
 
@@ -118,3 +126,4 @@ Deployment is made thanks to the Serverless Framework and its .yml file containi
 
 - Serverless documentation : https://serverless.com/framework/docs/ 
 - Serverless video tutorials : https://serverless.com/learn/courses/full-stack-application-development-on-aws/
+- https://fabianosoriani.wordpress.com/2011/08/15/express-api-on-node-js-with-mysql-auth/ 
