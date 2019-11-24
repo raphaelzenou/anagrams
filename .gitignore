@@ -5,10 +5,5 @@ jspm_packages
 # Serverless directories
 .serverless
 
-# Secret credentials
+# Secret DB credentials
 config.json
-
-# Old files or drafts
-handler-copy.js
-handler-old.js
-models

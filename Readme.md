@@ -107,6 +107,8 @@ Part 2 of this Readme file will be dedicated to this API documentation.
     - version 1.58.0
 - [Serverless Offline](https://github.com/dherault/serverless-offline)
     - The project uses **Serverless** that emulates AWS λ our local machine to speed up development
+- [Request-Promise](https://github.com/request/request-promise)
+    - **Request-Promise** is a simplified HTTP request client 'request' with Promise support
 - [AWS Lambda](https://aws.amazon.com/lambda/)
     - The project uses **AWS Lambda** as its serverless application development cloud solution
 - [AWS RDS](https://aws.amazon.com/rds/)
@@ -127,3 +129,4 @@ Deployment is made thanks to the Serverless Framework and its .yml file containi
 - Serverless documentation : https://serverless.com/framework/docs/ 
 - Serverless video tutorials : https://serverless.com/learn/courses/full-stack-application-development-on-aws/
 - https://fabianosoriani.wordpress.com/2011/08/15/express-api-on-node-js-with-mysql-auth/ 
+- https://medium.com/@fullsour/3-basic-variable-handling-in-serverless-framework-v1-14-0-4388d2feac7f
