@@ -32,7 +32,7 @@ function APIGet(url) {
 module.exports.generate = async function (event, context) {
 
     var randomStringPreCheck =  randomString(6);
-    // var randomStringPreCheck =  'blue';
+    // var randomStringPreCheck =  'blaee';
 
     console.log('1. Generating random string >>'+ randomStringPreCheck);
     url = 'http://www.anagramica.com/best/' + randomStringPreCheck;
@@ -42,18 +42,24 @@ module.exports.generate = async function (event, context) {
     var rawResponse = await APIGet(url);
     console.log('4. Response ');
     console.log(rawResponse);
+    console.log('5. fist element of the "best" response');
+    parsedResponse = JSON.parse(rawResponse);
+    console.log(parsedResponse.best[0]);
 
-    // if (rawResponse.best[0] === undefined || rawResponse.best[0].length < randomStringPreCheck.length ) { 
-    //     // need to check the lenght of the anagrams offered by the API as they can be 1 letter
-    //     // Here we assume that we only want the same number of letters
-    //     console.log('NoValidAnagram');
-    // }
-
-    properResponse = {
-        statusCode: 200,
-        body : rawResponse
+    if (parsedResponse.best[0] === undefined || parsedResponse.best[0].length < randomStringPreCheck.length ) { 
+        // need to check the lenght of the anagrams offered by the API as they can be 1 letter
+        // Here we assume that we only want the same number of letters
+        console.log('Nope, no luck...');
+        properResponse = {
+            statusCode: 200,
+            body : 'NoValidAnagram'}
+    } else {
+        console.log('Yipeee!!!');
+        properResponse = {
+            statusCode: 200,
+            body : rawResponse}
     }
-    console.log('5. what is sent back to the browser: ');
+    console.log('6. what is sent back to the browser: ');
     console.log(properResponse);
     return properResponse;
   };
