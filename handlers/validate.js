@@ -82,17 +82,6 @@ module.exports.validateFunc = async (event) => {
   console.log(incorrect);
 
   let score = correct.length;
-
-
-  // let finalResult = {
-  // totalScore,
-  // score,
-  // anagrams,
-  // correct, 
-  // incorrect,
-  // }
-  // no need to mention the keys in ES6 
-  // when we want the same as the vars
   
   var response = 
   {
@@ -104,7 +93,6 @@ module.exports.validateFunc = async (event) => {
       correct, 
       incorrect,
       }),
-    //  body: finalResult
   }
   return response; 
   }
