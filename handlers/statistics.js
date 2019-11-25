@@ -19,10 +19,11 @@ module.exports.statisticsFunc = async (event, context) => {
 
   await mysql.connect();
 
-  // let results = await mysql.query('SELECT * FROM table');
+  let statsUser = await mysql.query('SELECT * FROM submissions');
 //   // Run clean up function
   await mysql.end();
 
 //   // Return the results
-  return results;
+console.log(statsUser);
+return statsUser;
 }
