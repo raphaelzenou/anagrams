@@ -9,7 +9,7 @@ const mysql = require('serverless-mysql')({
     user     : config.dbuser,
     password : config.dbpassword
   }
-})
+});
 
 // Main handler function
 module.exports.statisticsFunc = async (event, context) => {
@@ -18,12 +18,16 @@ module.exports.statisticsFunc = async (event, context) => {
   let id = event.pathParameters.userId;
 
   await mysql.connect();
-
-  let statsUser = await mysql.query('SELECT * FROM submissions');
+  
+  let statsUser = await mysql.query('SELECT COUNT(*) as numberOfSubmissions, SUM(totalscore) as totalAvailableScore, SUM(score) as totalUserScore FROM anagramstable where userid = ?', [id]);
 //   // Run clean up function
-  await mysql.end();
+  // await mysql.end();
+  mysql.quit();
 
-//   // Return the results
-console.log(statsUser);
-return statsUser;
+// Return the results
+
+var response = 
+{statusCode: 200,
+  body: JSON.stringify(statsUser),}
+return response;
 }

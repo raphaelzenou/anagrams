@@ -1,5 +1,16 @@
 "use strict";
 const request = require('request');
+const config = require('../config.json');
+
+// Require and initialize outside of the main handler
+const mysql = require('serverless-mysql')({
+  config: {
+    host     : config.dbhost,
+    database : config.dbname,
+    user     : config.dbuser,
+    password : config.dbpassword
+  }
+});
 
 // // ********** API RESULT ********** 
 
@@ -83,6 +94,25 @@ module.exports.validateFunc = async (event) => {
 
   let score = correct.length;
   
+
+  await mysql.connect();
+  let dbData = {
+    'userid' : userId,
+    'generatedstring' : generatedString,
+    'anagrams' : anagrams.toString(),
+    'totalscore' : totalScore,
+    'score' : score,
+    'totalanagrams' : totalAnagrams.toString(),
+    'correct' : correct.toString(), 
+    'incorrect' : incorrect.toString(),
+    'date' : new Date()
+    };
+  let dbQuery ='INSERT INTO anagramstable SET ?' ;
+  let statsUser = await mysql.query(dbQuery, dbData);
+  //   // Run clean up function
+  // await mysql.end();
+  mysql.quit();
+
   var response = 
   {
     statusCode: 200,
