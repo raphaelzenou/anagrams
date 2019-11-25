@@ -1,6 +1,21 @@
-
 "use strict";
 const request = require('request');
+
+// ********** RANDOM STRING GENERATOR ********** 
+
+function randomStringFunc(chars) {
+    return new Promise((resolve) => {
+        var randomString = '';
+        var letters      = 'abcdefghijklmnopqrstuvwxyz';
+        for ( var i = 0; i < chars; i++ ) {
+            var letter = letters.charAt(Math.floor(Math.random() * letters.length));
+            randomString += letter;
+        }
+        resolve(randomString);
+    });
+}
+
+// ********** API RESULT + STRING TESTED ********** 
 
 function apiCallFunc(string) {
     return new Promise((resolve) => {
@@ -16,17 +31,8 @@ function apiCallFunc(string) {
     })
 }
 
-function randomStringFunc(chars) {
-    return new Promise((resolve) => {
-        var randomString = '';
-        var letters      = 'abcdefghijklmnopqrstuvwxyz';
-        for ( var i = 0; i < chars; i++ ) {
-            var letter = letters.charAt(Math.floor(Math.random() * letters.length));
-            randomString += letter;
-        }
-        resolve(randomString);
-    });
-}
+// ********** ASYNC API CALLER ********** 
+
 
 async function apiGeneratorFunc() {
     try {
@@ -39,13 +45,17 @@ async function apiGeneratorFunc() {
     }
 }
 
+// ********** ASYNC RANDOM STRING VALIDATOR ********** 
+
+
 async function validStringFunc() {
     let valid = false;
     try {
         let apiTest = await apiGeneratorFunc(); // init
         do {
             // if (apiTest.string.length === apiTest.apiresponse.best[0]){
-            if (apiTest.apiresponse.best[0] != undefined){
+            if (apiTest.apiresponse.best[0] != undefined 
+                && apiTest.apiresponse.best[0].length == apiTest.string.length ){
                 valid = true;
                 console.log('SUCCESS.. RESPONDING STRING');
                 console.log(apiTest.string);
@@ -64,6 +74,7 @@ async function validStringFunc() {
     }
 }
 
+// ********** ASYNC FUNCTION HANDLER ********** 
 
 //  No callback as we are using async/await
 
@@ -72,11 +83,6 @@ module.exports.generateFunc = async (event) => {
     // let validString = await apiGeneratorFunc();
     let validString = await validStringFunc();
     console.log('Valid string:', validString);
-    // console.log('Parsed strings vs 1st elem: ');
-    // console.log(validString.string);
-    // console.log(validString.apiresponse.best[0]);
-
-    // return validString;
     var response =
     {
         statusCode: 200,
