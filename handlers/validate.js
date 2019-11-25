@@ -1,6 +1,7 @@
 "use strict";
 const request = require('request');
 const config = require('../config.json');
+const compare = require('../stringcompare.js');
 
 // Require and initialize outside of the main handler
 const mysql = require('serverless-mysql')({
@@ -12,7 +13,10 @@ const mysql = require('serverless-mysql')({
   }
 });
 
-// // ********** API RESULT ********** 
+// ********** API RESULT ********** 
+
+// same function as for the generate handler
+// but without the random string output
 
 function apiCallFunc(string) {
     return new Promise((resolve) => {
@@ -26,9 +30,9 @@ function apiCallFunc(string) {
 }
 
 // ********** ASYNC API CALLER ********** 
-// same function as for the generate handler
+// similar function as for the generate handler
 // but with a string input
-// should be made a module to be used in both handlers
+// could be made a module to be used in both handlers
 
 async function apiGeneratorFunc(string) {
     try {
@@ -40,7 +44,7 @@ async function apiGeneratorFunc(string) {
     }
 }
 
-// ********** ASYNC FUNCTION HANDLER ********** 
+// ********** HANDLER ********** 
 //  No callback as we are using async/await
 
 module.exports.validateFunc = async (event) => {
@@ -51,7 +55,8 @@ module.exports.validateFunc = async (event) => {
   let userId = postData.userId;
   let generatedString = postData.generatedString;
 
-  // Response elements in order
+  // Response elements in order :
+
   // let totalScore;
   // let score;
   let anagrams = postData.anagrams;
@@ -59,7 +64,7 @@ module.exports.validateFunc = async (event) => {
   let incorrect = [];
 
   // Now testing the POST data
-    // First let's get all possible anagrams
+  // First let's get all possible anagrams
   console.log('Fetching anagrams:');
 
   let apiResponse = await apiGeneratorFunc(generatedString); // init
@@ -69,6 +74,10 @@ module.exports.validateFunc = async (event) => {
   console.log(totalAnagrams);
   console.log('Number of anagrams:');
   console.log(totalAnagrams.length);
+
+  // Here we can add a loop to double check that the values returned by this third party API
+  // Create a method that accepts two strings and 
+  // determines whether the strings are anagrams of each other.
 
   let totalScore = totalAnagrams.length;
 

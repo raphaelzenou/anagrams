@@ -1,6 +1,98 @@
 # ANAGRAMS 
 
-# Part 1 - Challenge Instructions
+# Part 1 - API Documentation
+ 
+This API could be the backend for a game where the users would be able to get random strings, submit all corresponding anagrams they think are correct and also produce basic statistics for each users (for a leaderboard for instance).
+
+Your solution should use the Serverless Framework, NodeJS, AWS and MySQL. Please reply with a link to a public repository containing your solution within one week of receiving the task, and get in touch if you have any questions. Include a discussion of anything that you found challenging, explanation of design decisions you took and what you would add given more time. You needn't spend more than a few hours on this, we are more interested in seeing how you approach the task than receiving a finished product.
+
+This description has purposedly been kept very short as the challenge instructions are already explaining the required features of the API. PLeas e see Part 2 of this documentation where I referenced the instructions initially sent.
+
+
+### Features
+
+The API we build has three main functionalitites : 
+
+1. Generating a random string of 6 characters that has at least 1 anagram available
+2. Receiving a user input (list of anagrams) and checking it against the Anagramica's API
+3. Generating a report of any user stats
+
+Users having not yet played the game
+
+#### Features Left to Implement
+
+- Adding a leaderboard function where users can compare they stats
+- Obviously adding a GUI
+- Further improve the random string generator so it nevers produces words from the dictionary
+
+## Challenges
+
+## Deployment
+
+Deployment is made thanks to the Serverless Framework and its .yml file containing all required settings to deploy our Anaggrams app on AWS Lambda from the CLI combined with Serverless' web dashboard.
+
+Unfortunately there seems to be a timeout parameter issue with AWS Lambda preventing the MySQL requests to be carried out.
+
+
+Endpoints:
+  GET - https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/statistics/{userId}
+  POST - https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/validate
+  GET - https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/generate 
+
+Lambdas:
+  statisticsFunc: anagrams-api-dev-statisticsFunc
+  validateFunc: anagrams-api-dev-validateFunc
+  generateFunc: anagrams-api-dev-generateFunc
+
+## Technologies Used
+
+- [Javascript ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript)
+    - The project uses **Javacript** as its unique programming language
+- [Node.js](https://nodejs.org/)
+    - The project uses **Node.js** as its server side Javascript execution environement (backend)
+    - version 12.13.1. (Serverless requires Node 6 or higher)
+- [Serverless Framework](https://serverless.com/)
+    - The project uses **Serverless** that simplifies AWS serverless Lambda functions setup
+    - version 1.58.0
+    - additional modules : https://github.com/pmuens/awesome-serverless 
+- [Serverless Offline](https://github.com/dherault/serverless-offline)
+    - The project uses **Serverless** that emulates AWS λ our local machine to speed up development
+- [Request-Promise](https://github.com/request/request-promise)
+    - **Request-Promise** is a simplified HTTP request client 'request' with Promise support
+- [AWS Lambda](https://aws.amazon.com/lambda/)
+    - The project uses **AWS Lambda** as its serverless application development cloud solution
+- [AWS RDS](https://aws.amazon.com/rds/)
+    - The project uses **AWS Lambda** as its cloud based MySQL relational database 
+<!-- - [Sequelize](https://sequelize.org/)
+    - The project uses **Sequelize** as its ORM for its MySQL database -->
+
+https://github.com/jeremydaly/serverless-mysql
+
+Serverless MySQL adds a connection management component to the mysql module that is designed specifically for use with serverless applications
+Supports all standard mysql module queries : https://github.com/mysqljs/mysql#performing-queries
+
+https://www.w3schools.com/nodejs/nodejs_mysql.asp 
+
+
+## Testing
+
+
+
+## Credits
+
+- Serverless documentation : https://serverless.com/framework/docs/ 
+- Serverless video tutorials : https://serverless.com/learn/courses/full-stack-application-development-on-aws/
+- https://fabianosoriani.wordpress.com/2011/08/15/express-api-on-node-js-with-mysql-auth/ 
+- https://medium.com/@fullsour/3-basic-variable-handling-in-serverless-framework-v1-14-0-4388d2feac7f
+- https://ponyfoo.com/articles/understanding-javascript-async-await
+- https://medium.com/hackernoon/async-await-essentials-for-production-loops-control-flows-limits-23eb40f171bd
+- https://medium.com/tensult/async-await-on-aws-lambda-function-for-nodejs-2783febbccd9
+- https://irvinlim.com/blog/async-await-on-aws-lambda/
+- https://stackoverflow.com/questions/23785465/javascript-anagram-comparison
+
+
+
+# Part 2 - Challenge Instructions
 
 
 ## Anagrams
@@ -81,63 +173,6 @@ It's probably a good idea to double check that the values returned by this third
 
 API documentation should be provided to explain how the API endpoints should be called, and what kind of responses to expect.
 
-Part 2 of this Readme file will be dedicated to this API documentation.
+Part 1 of this Readme file is dedicated to the API documentation.
 
 
-# Part 2 - API Documentation [TBC]
-
- 
-## API
-
-### Features
-
-#### Existing Features
-
-#### Features Left to Implement
-
-## Technologies Used
-
-- [Javascript ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript)
-    - The project uses **Javacript** as its unique programming language
-- [Node.js](https://nodejs.org/)
-    - The project uses **Node.js** as its server side Javascript execution environement (backend)
-    - version 12.13.1. (Serverless requires Node 6 or higher)
-- [Serverless Framework](https://serverless.com/)
-    - The project uses **Serverless** that simplifies AWS serverless Lambda functions setup
-    - version 1.58.0
-    - additional modules : https://github.com/pmuens/awesome-serverless 
-- [Serverless Offline](https://github.com/dherault/serverless-offline)
-    - The project uses **Serverless** that emulates AWS λ our local machine to speed up development
-- [Request-Promise](https://github.com/request/request-promise)
-    - **Request-Promise** is a simplified HTTP request client 'request' with Promise support
-- [AWS Lambda](https://aws.amazon.com/lambda/)
-    - The project uses **AWS Lambda** as its serverless application development cloud solution
-- [AWS RDS](https://aws.amazon.com/rds/)
-    - The project uses **AWS Lambda** as its cloud based MySQL relational database 
-<!-- - [Sequelize](https://sequelize.org/)
-    - The project uses **Sequelize** as its ORM for its MySQL database -->
-
-https://github.com/jeremydaly/serverless-mysql
-
-Serverless MySQL adds a connection management component to the mysql module that is designed specifically for use with serverless applications
-Supports all standard mysql module queries : https://github.com/mysqljs/mysql#performing-queries
-
-https://www.w3schools.com/nodejs/nodejs_mysql.asp 
-
-
-## Testing
-
-## Deployment
-
-Deployment is made thanks to the Serverless Framework and its .yml file containing all required settings to deploy our Anaggrams app on AWS Lambda from the CLI combined with Serverless' web dashboard.
-
-## Credits
-
-- Serverless documentation : https://serverless.com/framework/docs/ 
-- Serverless video tutorials : https://serverless.com/learn/courses/full-stack-application-development-on-aws/
-- https://fabianosoriani.wordpress.com/2011/08/15/express-api-on-node-js-with-mysql-auth/ 
-- https://medium.com/@fullsour/3-basic-variable-handling-in-serverless-framework-v1-14-0-4388d2feac7f
-- https://ponyfoo.com/articles/understanding-javascript-async-await
-- https://medium.com/hackernoon/async-await-essentials-for-production-loops-control-flows-limits-23eb40f171bd
-- https://medium.com/tensult/async-await-on-aws-lambda-function-for-nodejs-2783febbccd9
-- https://irvinlim.com/blog/async-await-on-aws-lambda/

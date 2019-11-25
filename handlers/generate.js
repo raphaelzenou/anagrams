@@ -15,7 +15,7 @@ function randomStringFunc(chars) {
     });
 }
 
-// ********** API RESULT + STRING TESTED ********** 
+// ********** API RESULT INCL. RANDOM STRING ********** 
 
 function apiCallFunc(string) {
     return new Promise((resolve) => {
@@ -32,7 +32,6 @@ function apiCallFunc(string) {
 }
 
 // ********** ASYNC API CALLER ********** 
-
 
 async function apiGeneratorFunc() {
     try {
@@ -56,9 +55,8 @@ async function apiGeneratorFunc() {
 async function validStringFunc() {
     let valid = false;
     try {
-        let apiTest = await apiGeneratorFunc(); // init
+        let apiTest = await apiGeneratorFunc();
         do {
-            // if (apiTest.string.length === apiTest.apiresponse.best[0]){
             if (apiTest.apiresponse.best[0] != undefined 
                 && apiTest.apiresponse.best[0].length == apiTest.string.length ){
                 valid = true;
@@ -70,7 +68,7 @@ async function validStringFunc() {
                 console.log('FAIL.. REGENERATING STRING');
                 console.log(apiTest.string);
                 console.log(apiTest.apiresponse.best[0]);
-                apiTest = await apiGeneratorFunc(); // new
+                apiTest = await apiGeneratorFunc();
             } 
         } while (valid === false );
     }
@@ -79,17 +77,19 @@ async function validStringFunc() {
     }
 }
 
-// ********** ASYNC FUNCTION HANDLER ********** 
+// ********** HANDLER ********** 
 
 //  No callback as we are using async/await
-
 module.exports.generateFunc = async (event) => {
 
-    // let validString = await apiGeneratorFunc();
     let validString = await validStringFunc();
     console.log('Valid string:', validString);
-    var response =
-    {
+
+    // Returning a valid random string 
+    // i.e. with at least one anagram 
+    // of the same number of chars
+    
+    var response = {
         statusCode: 200,
         headers: { 'Content-Type': 'application/json' },
         body : JSON.stringify({"generatedString": validString })
