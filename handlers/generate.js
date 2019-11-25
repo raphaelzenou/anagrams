@@ -8,7 +8,10 @@ function apiCallFunc(string) {
         request({ method: "GET", url: url }, function (error, response, body) {
             // console.error('error:', error); // for debugging
             console.log('Request body:', body);
-            resolve(body); // where the promise is honoured
+            resolve(
+            {"string" : string, 
+            "apiresponse" : JSON.parse(body)
+            });
           });
     })
 }
@@ -36,10 +39,11 @@ async function apiGeneratorFunc() {
     }
 }
 
-// async function keepDigging() {
+// async function validStringFunc() {
 //     try {
-//         let randomString = await randomStringFunc(6);
-//         let apiCallResult = await apiCallFunc(randomString);
+//         let apiTest = await apiGeneratorFunc();
+//         while JSON.parse(apiTest).best[0]
+
 //         return apiCallResult;
 //     }
 //     catch(error) {
@@ -53,15 +57,18 @@ async function apiGeneratorFunc() {
 module.exports.generateFunc = async (event) => {
 
     let validString = await apiGeneratorFunc();
+    // let validString = await validStringFunc();
     console.log('Valid string:', validString);
-    console.log('Parsed first elem: ', JSON.parse(validString).best[0]);
+    console.log('Parsed strings vs 1st elem: ');
+    console.log(validString.string);
+    console.log(validString.apiresponse.best[0]);
 
     // return validString;
     var response =
     {
         statusCode: 200,
-        // body : JSON.stringify({"generatedString": validString })
-        body : validString
+        body : JSON.stringify({"generatedString": validString })
+        // body : validString
     };
     return response;
 }
