@@ -83,16 +83,25 @@ module.exports.validateFunc = async (event) => {
   console.log('voila ce quon a recu');
   console.log(postData);
 
-  // db.anagrams.create({
-  //   userId: body.userId,
-  //   generatedString: body.generatedString,
-  //   anagrams: body.anagrams
-  // })
+  let userId = postData.userId;
+  let generatedString = postData.generatedString;
 
-    var response = 
-    {
-      statusCode: 200,
-      body: JSON.stringify({postData}),
-    }
-    return response; 
+  // Response elements in order
+  let totalScore = 0;
+  let score = 0;
+  let anagrams = postData.anagrams;
+  let correct = [];
+  let incorrect = [];
+
+  // Now testing the POST data
+
+  
+
+  var response = 
+  {
+    statusCode: 200,
+    body: JSON.stringify({postData}),
+
+  }
+  return response; 
   }
