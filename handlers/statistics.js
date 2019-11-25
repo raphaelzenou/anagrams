@@ -1,12 +1,28 @@
 "use strict";
+const config = require('../config.json');
 
-module.exports.statisticsFunc = (event, context, callback) => {
-    // getting the path variable = userId
-    var id = event.pathParameters.userId;
-    const message = 'Welcome to our anagrams game ' + id;
-    const response = {
-      statusCode: 200,
-      body: JSON.stringify({message: message})
-    }
-    callback(null, response);
-  };
+// Require and initialize outside of the main handler
+const mysql = require('serverless-mysql')({
+  config: {
+    host     : config.dbhost,
+    database : config.dbname,
+    user     : config.dbuser,
+    password : config.dbpassword
+  }
+})
+
+// Main handler function
+module.exports.statisticsFunc = async (event, context) => {
+  // Run your query
+  // getting the path variable = userId
+  let id = event.pathParameters.userId;
+
+  await mysql.connect();
+
+  // let results = await mysql.query('SELECT * FROM table');
+//   // Run clean up function
+  await mysql.end();
+
+//   // Return the results
+  return results;
+}

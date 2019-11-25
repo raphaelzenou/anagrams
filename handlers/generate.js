@@ -51,6 +51,7 @@ async function apiGeneratorFunc() {
 // For instance check if the string generated
 // is not in the dictionary via http://www.anagramica.com/lookup/:word
 // but this not in the instructions i.e. not the MVP
+// user might just be lucky a get a proper word so a free point
 
 async function validStringFunc() {
     let valid = false;

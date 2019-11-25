@@ -105,6 +105,7 @@ Part 2 of this Readme file will be dedicated to this API documentation.
 - [Serverless Framework](https://serverless.com/)
     - The project uses **Serverless** that simplifies AWS serverless Lambda functions setup
     - version 1.58.0
+    - additional modules : https://github.com/pmuens/awesome-serverless 
 - [Serverless Offline](https://github.com/dherault/serverless-offline)
     - The project uses **Serverless** that emulates AWS λ our local machine to speed up development
 - [Request-Promise](https://github.com/request/request-promise)
@@ -117,6 +118,10 @@ Part 2 of this Readme file will be dedicated to this API documentation.
     - The project uses **Sequelize** as its ORM for its MySQL database -->
 
 https://github.com/jeremydaly/serverless-mysql
+
+Serverless MySQL adds a connection management component to the mysql module that is designed specifically for use with serverless applications
+Supports all standard mysql module queries : https://github.com/mysqljs/mysql#performing-queries
+
 https://www.w3schools.com/nodejs/nodejs_mysql.asp 
 
 

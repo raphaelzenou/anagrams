@@ -8,3 +8,4 @@ jspm_packages
 # Secret DB credentials
 config.json
 ignorefolder
+/*/*/bin/ignorefolder
