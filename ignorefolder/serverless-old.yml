@@ -1,0 +1,40 @@
+app: anagrams-app
+org: raphaelzenou
+service: anagrams-final
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+
+plugins:
+  - serverless-offline
+package:
+  include: 
+    - handlers/**
+    - models/**
+
+functions:
+  statisticsFunc:
+    handler: handlers/statistics.statisticsFunc
+    events:
+    - http:
+        path: statistics/{userId}
+        method: get
+        request: 
+          parameters: 
+            paths: 
+              userId: true
+
+  validateFunc:
+    handler: handlers/validate.validateFunc
+    events:
+    - http:
+        path: validate
+        method: post
+
+  generateFunc:
+    handler: handlers/generate.generateFunc
+    events:
+    - http:
+        path: generate
+        method: get

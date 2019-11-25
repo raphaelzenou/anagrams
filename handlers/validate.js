@@ -111,11 +111,12 @@ module.exports.validateFunc = async (event) => {
   let statsUser = await mysql.query(dbQuery, dbData);
   //   // Run clean up function
   // await mysql.end();
-  mysql.quit();
+  await mysql.quit();
 
   var response = 
   {
     statusCode: 200,
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       totalScore,
       score,

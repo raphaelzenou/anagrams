@@ -11,10 +11,10 @@
 #
 # Happy Coding!
 
-service: anagrams-api
+service: anagrams
 # app and org for use with dashboard.serverless.com
-app: anagrams-api
-org: raphaelzenou
+#app: your-app-name
+#org: your-org-name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -23,19 +23,13 @@ org: raphaelzenou
 provider:
   name: aws
   runtime: nodejs12.x
-  
 
 # you can overwrite defaults here
 #  stage: dev
 #  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
-iamRoleStatements:
-  - Effect: "Allow"
-    Action:
-      - "cloudformation:DescribeStackResource"
-    Resource: "*"
- 
+#  iamRoleStatements:
 #    - Effect: "Allow"
 #      Action:
 #        - "s3:ListBucket"
@@ -55,15 +49,6 @@ iamRoleStatements:
 #    variable1: value1
 
 # you can add packaging information here
-
-plugins:
-  - serverless-offline
-package:
-  include: 
-    - handlers/**
-    - models/**
-
-
 #package:
 #  include:
 #    - include-me.js
@@ -72,38 +57,9 @@ package:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
-
 functions:
-  statisticsFunc:
-    handler: handlers/statistics.statisticsFunc
-    events:
-    - http:
-        path: statistics/{userId}
-        method: get
-        request: 
-          parameters: 
-            paths: 
-              userId: true
-
-  validateFunc:
-    handler: handlers/validate.validateFunc
-    events:
-    - http:
-        path: validate
-        method: post
-
-  generateFunc:
-    handler: handlers/generate.generateFunc
-    events:
-    - http:
-        path: generate
-        method: get
-
-
-
-# functions:
-#   hello:
-#     handler: handler.hello
+  hello:
+    handler: handler.hello
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

@@ -4,8 +4,5 @@ jspm_packages
 
 # Serverless directories
 .serverless
-
-# Secret DB credentials
 config.json
-ignorefolder
-/*/*/bin/ignorefolder
+ignoredfolder

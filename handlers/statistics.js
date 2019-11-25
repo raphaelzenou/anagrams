@@ -22,7 +22,7 @@ module.exports.statisticsFunc = async (event, context) => {
   let statsUser = await mysql.query('SELECT COUNT(*) as numberOfSubmissions, SUM(totalscore) as totalAvailableScore, SUM(score) as totalUserScore FROM anagramstable where userid = ?', [id]);
 //   // Run clean up function
   // await mysql.end();
-  mysql.quit();
+  await mysql.quit();
 
 // Return the results
 

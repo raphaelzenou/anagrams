@@ -91,8 +91,8 @@ module.exports.generateFunc = async (event) => {
     var response =
     {
         statusCode: 200,
+        headers: { 'Content-Type': 'application/json' },
         body : JSON.stringify({"generatedString": validString })
-        // body : validString
     };
     return response;
 }
