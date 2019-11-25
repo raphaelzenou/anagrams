@@ -14,18 +14,20 @@ function apiCallFunc(string) {
 }
 
 function randomStringFunc(chars) {
-    var randomString = '';
-    var letters      = 'abcdefghijklmnopqrstuvwxyz';
-    for ( var i = 0; i < chars; i++ ) {
-        var letter = letters.charAt(Math.floor(Math.random() * letters.length));
-        randomString += letter;
-    }
-    return randomString;
+    return new Promise((resolve) => {
+        var randomString = '';
+        var letters      = 'abcdefghijklmnopqrstuvwxyz';
+        for ( var i = 0; i < chars; i++ ) {
+            var letter = letters.charAt(Math.floor(Math.random() * letters.length));
+            randomString += letter;
+        }
+        resolve(randomString);
+    });
 }
 
-async function validStringFunc() {
+async function apiGeneratorFunc() {
     try {
-        let randomString = randomStringFunc(6);
+        let randomString = await randomStringFunc(6);
         let apiCallResult = await apiCallFunc(randomString);
         return apiCallResult;
     }
@@ -34,11 +36,23 @@ async function validStringFunc() {
     }
 }
 
+// async function keepDigging() {
+//     try {
+//         let randomString = await randomStringFunc(6);
+//         let apiCallResult = await apiCallFunc(randomString);
+//         return apiCallResult;
+//     }
+//     catch(error) {
+//         return error;
+//     }
+// }
+
+
 //  No callback as we are using async/await
 
 module.exports.generateFunc = async (event) => {
 
-    let validString = await validStringFunc();
+    let validString = await apiGeneratorFunc();
     console.log('Valid string:', validString);
     console.log('Parsed first elem: ', JSON.parse(validString).best[0]);
 
