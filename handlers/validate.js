@@ -1,49 +1,31 @@
 "use strict";
-// const request = require('request');
+const request = require('request');
 
-// // ********** RANDOM STRING GENERATOR ********** 
+// // ********** API RESULT ********** 
 
-// function randomStringFunc(chars) {
-//     return new Promise((resolve) => {
-//         var randomString = '';
-//         var letters      = 'abcdefghijklmnopqrstuvwxyz';
-//         for ( var i = 0; i < chars; i++ ) {
-//             var letter = letters.charAt(Math.floor(Math.random() * letters.length));
-//             randomString += letter;
-//         }
-//         resolve(randomString);
-//     });
-// }
-
-// // ********** API RESULT + STRING TESTED ********** 
-
-// function apiCallFunc(string) {
-//     return new Promise((resolve) => {
-//         const url = 'http://www.anagramica.com/best/' + string;
-//         request({ method: "GET", url: url }, function (error, response, body) {
-//             // console.error('error:', error); // for debugging
-//             console.log('API response:', body);
-//             resolve(
-//             {"string" : string, 
-//             "apiresponse" : JSON.parse(body)
-//             });
-//           });
-//     })
-// }
+function apiCallFunc(string) {
+    return new Promise((resolve) => {
+        const url = 'http://www.anagramica.com/best/' + string;
+        request({ method: "GET", url: url }, function (error, response, body) {
+            // console.error('error:', error); // for debugging
+            console.log('API response:', body);
+            resolve(JSON.parse(body));
+          });
+    })
+}
 
 // // ********** ASYNC API CALLER ********** 
 
 
-// async function apiGeneratorFunc() {
-//     try {
-//         let randomString = await randomStringFunc(3);
-//         let apiCallResult = await apiCallFunc(randomString);
-//         return apiCallResult;
-//     }
-//     catch(error) {
-//         return error;
-//     }
-// }
+async function apiGeneratorFunc(string) {
+    try {
+        let apiCallResult = await apiCallFunc(string);
+        return apiCallResult;
+    }
+    catch(error) {
+        return error;
+    }
+}
 
 // // ********** ASYNC RANDOM STRING VALIDATOR ********** 
 
@@ -80,7 +62,7 @@
 
 module.exports.validateFunc = async (event) => {
   const postData = JSON.parse(event.body);
-  console.log('voila ce quon a recu');
+  console.log('POST Data received:');
   console.log(postData);
 
   let userId = postData.userId;
@@ -94,13 +76,18 @@ module.exports.validateFunc = async (event) => {
   let incorrect = [];
 
   // Now testing the POST data
+  console.log('Fetching anagrams:');
 
-  
+  let apiResponse = await apiGeneratorFunc(generatedString); // init
+  console.log(apiResponse);
+  let totalAnagrams = apiResponse.best;
+  console.log('All anagrams:');
+  console.log(totalAnagrams);
 
   var response = 
   {
     statusCode: 200,
-    body: JSON.stringify({postData}),
+    body: JSON.stringify({apiResponse}),
 
   }
   return response; 
