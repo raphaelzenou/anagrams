@@ -113,9 +113,11 @@ Part 2 of this Readme file will be dedicated to this API documentation.
     - The project uses **AWS Lambda** as its serverless application development cloud solution
 - [AWS RDS](https://aws.amazon.com/rds/)
     - The project uses **AWS Lambda** as its cloud based MySQL relational database 
-- [Sequelize](https://sequelize.org/)
-    - The project uses **Sequelize** as its ORM for its MySQL database
+<!-- - [Sequelize](https://sequelize.org/)
+    - The project uses **Sequelize** as its ORM for its MySQL database -->
 
+https://github.com/jeremydaly/serverless-mysql
+https://www.w3schools.com/nodejs/nodejs_mysql.asp 
 
 
 ## Testing
@@ -130,3 +132,7 @@ Deployment is made thanks to the Serverless Framework and its .yml file containi
 - Serverless video tutorials : https://serverless.com/learn/courses/full-stack-application-development-on-aws/
 - https://fabianosoriani.wordpress.com/2011/08/15/express-api-on-node-js-with-mysql-auth/ 
 - https://medium.com/@fullsour/3-basic-variable-handling-in-serverless-framework-v1-14-0-4388d2feac7f
+- https://ponyfoo.com/articles/understanding-javascript-async-await
+- https://medium.com/hackernoon/async-await-essentials-for-production-loops-control-flows-limits-23eb40f171bd
+- https://medium.com/tensult/async-await-on-aws-lambda-function-for-nodejs-2783febbccd9
+- https://irvinlim.com/blog/async-await-on-aws-lambda/

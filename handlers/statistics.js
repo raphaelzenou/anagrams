@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports.statistics = (event, context, callback) => {
+module.exports.statisticsFunc = (event, context, callback) => {
     // getting the path variable = userId
     var id = event.pathParameters.userId;
     const message = 'Welcome to our anagrams game ' + id;

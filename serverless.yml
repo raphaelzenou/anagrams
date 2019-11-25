@@ -14,8 +14,8 @@ package:
     - models/**
 
 functions:
-  statistics:
-    handler: handlers/read.statistics
+  statisticsFunc:
+    handler: handlers/statistics.statisticsFunc
     events:
     - http:
         path: statistics/{userId}
@@ -25,15 +25,15 @@ functions:
             paths: 
               userId: true
 
-  validate:
-    handler: handlers/create.validate
+  validateFunc:
+    handler: handlers/validate.validateFunc
     events:
     - http:
         path: validate
         method: post
 
-  generate:
-    handler: handlers/random.generate
+  generateFunc:
+    handler: handlers/generate.generateFunc
     events:
     - http:
         path: generate

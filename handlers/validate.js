@@ -1,6 +1,6 @@
 const db = require('../dbconnect.js');
 
-module.exports.validate = (event, context, callback) => {
+module.exports.validateFunc = (event, context, callback) => {
     const body = JSON.parse(event.body);
     console.log('voila ce quon a recu');
     console.log(body);
