@@ -36,7 +36,7 @@ function apiCallFunc(string) {
 
 async function apiGeneratorFunc() {
     try {
-        let randomString = await randomStringFunc(3);
+        let randomString = await randomStringFunc(6);
         let apiCallResult = await apiCallFunc(randomString);
         return apiCallResult;
     }
@@ -47,6 +47,10 @@ async function apiGeneratorFunc() {
 
 // ********** ASYNC RANDOM STRING VALIDATOR ********** 
 
+// We could go further here in the tests 
+// For instance check if the string generated
+// is not in the dictionary via http://www.anagramica.com/lookup/:word
+// but this not in the instructions i.e. not the MVP
 
 async function validStringFunc() {
     let valid = false;

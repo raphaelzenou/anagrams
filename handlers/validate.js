@@ -14,8 +14,10 @@ function apiCallFunc(string) {
     })
 }
 
-// // ********** ASYNC API CALLER ********** 
-
+// ********** ASYNC API CALLER ********** 
+// same function as for the generate handler
+// but with a string input
+// should be made a module to be used in both handlers
 
 async function apiGeneratorFunc(string) {
     try {
@@ -27,37 +29,7 @@ async function apiGeneratorFunc(string) {
     }
 }
 
-// // ********** ASYNC RANDOM STRING VALIDATOR ********** 
-
-
-// async function validStringFunc() {
-//     let valid = false;
-//     try {
-//         let apiTest = await apiGeneratorFunc(); // init
-//         do {
-//             // if (apiTest.string.length === apiTest.apiresponse.best[0]){
-//             if (apiTest.apiresponse.best[0] != undefined 
-//                 && apiTest.apiresponse.best[0].length == apiTest.string.length ){
-//                 valid = true;
-//                 console.log('SUCCESS.. RESPONDING STRING');
-//                 console.log(apiTest.string);
-//                 console.log(apiTest.apiresponse.best[0]);
-//                 return apiTest.string;
-//             } else {
-//                 console.log('FAIL.. REGENERATING STRING');
-//                 console.log(apiTest.string);
-//                 console.log(apiTest.apiresponse.best[0]);
-//                 apiTest = await apiGeneratorFunc(); // new
-//             } 
-//         } while (valid === false );
-//     }
-//     catch(error) {
-//         return error;
-//     }
-// }
-
 // ********** ASYNC FUNCTION HANDLER ********** 
-
 //  No callback as we are using async/await
 
 module.exports.validateFunc = async (event) => {
@@ -69,13 +41,14 @@ module.exports.validateFunc = async (event) => {
   let generatedString = postData.generatedString;
 
   // Response elements in order
-  let totalScore = 0;
-  let score = 0;
+  // let totalScore;
+  // let score;
   let anagrams = postData.anagrams;
   let correct = [];
   let incorrect = [];
 
   // Now testing the POST data
+    // First let's get all possible anagrams
   console.log('Fetching anagrams:');
 
   let apiResponse = await apiGeneratorFunc(generatedString); // init
@@ -83,12 +56,55 @@ module.exports.validateFunc = async (event) => {
   let totalAnagrams = apiResponse.best;
   console.log('All anagrams:');
   console.log(totalAnagrams);
+  console.log('Number of anagrams:');
+  console.log(totalAnagrams.length);
 
+  let totalScore = totalAnagrams.length;
+
+  // Second let's check the user's anagrams
+
+  // As we made sure generatedString 
+  // had same length anagrams
+  // We know the totalAnagrams list is fair
+
+  anagrams.forEach(anagram => {
+        if (totalAnagrams.includes(anagram)) {
+          correct.push(anagram);
+        } else {
+          incorrect.push(anagram);
+        }
+    });
+  console.log('User anagrams:');
+  console.log(anagrams);
+  console.log('Correct user anagrams:');
+  console.log(correct);
+  console.log('Incorrect user anagrams:');
+  console.log(incorrect);
+
+  let score = correct.length;
+
+
+  // let finalResult = {
+  // totalScore,
+  // score,
+  // anagrams,
+  // correct, 
+  // incorrect,
+  // }
+  // no need to mention the keys in ES6 
+  // when we want the same as the vars
+  
   var response = 
   {
     statusCode: 200,
-    body: JSON.stringify({apiResponse}),
-
+    body: JSON.stringify({
+      totalScore,
+      score,
+      anagrams,
+      correct, 
+      incorrect,
+      }),
+    //  body: finalResult
   }
   return response; 
   }
