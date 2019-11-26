@@ -63,8 +63,7 @@ It took me several hours to figure out why my code was not running on AWS when i
     - **AWS Lambda** is a serverless application development cloud solution
 - [AWS RDS](https://aws.amazon.com/rds/)
     - **AWS RDS** is a cloud based MySQL relational database 
-- [Anagramica API](http://www.anagramica.com/api)
-    - **Anagramica**'s API is a simple API allowing users to generat anagrams arrays and check if words are in the dictionary
+
 ## Deployment
 
 Deployment is made thanks to the Serverless Framework and its .yml file containing all required settings to deploy our Anaggrams app on AWS Lambda from the CLI combined with Serverless' web dashboard. The MySQL database is provided by AWS (RDS) too.
@@ -88,7 +87,6 @@ The user is presented with a random 6 characters strin.
 
 - METHOD : GET 
 - ENDPOINT :  /generate
-- LOCAL URL : http://localhost:3000/generate
 - AWS URL : https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/generate
 
 - API SAMPLE RESPONSE :
@@ -111,7 +109,6 @@ In our example the user scored 1 point :  "snail" was correct, but "sailn" is in
 
 - METHOD : POST
 - ENDPOINT : /validate
-- LOCAL URL : http://localhost:3000/validate
 - AWS URL : https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/validate
 
 - USER SUBMISSION BODY
@@ -149,7 +146,6 @@ Prospect users having not yet played the game will simply get empty stats but no
 - METHOD : GET
 
 - ENDPOINT : /statistics/{userId}
-- LOCAL URL : http://localhost:3000/statistics/{userId}
 - AWS URL : https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/statistics/{userId}
   e.g. https://w14l64z000.execute-api.us-east-1.amazonaws.com/dev/statistics/user4
 
