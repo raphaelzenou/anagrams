@@ -102,12 +102,8 @@ module.exports.validateFunc = async (event) => {
   } 
   console.log(anCheck);
 
-  // Second let's check the user's anagrams
+  // Let's check the user's anagrams
 
-  // As we made sure generatedString 
-  // had same length anagrams
-  // We know the totalAnagrams list is fair
-  
   anagrams.forEach(anagram => {
         if (totalAnagrams.includes(anagram)) {
           correct.push(anagram);
@@ -115,7 +111,6 @@ module.exports.validateFunc = async (event) => {
           incorrect.push(anagram);
         }
     });
-  
   console.log('User anagrams:');
   console.log(anagrams);
   console.log('Correct user anagrams:');
