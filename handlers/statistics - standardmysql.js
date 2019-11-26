@@ -1,5 +1,6 @@
-/// THIS IS a standard mysql attempt to 
-// solve the following AWS Lambda message:
+/// THIS was a an attempt to 
+// solve the following AWS Lambda message by using the standard mysql module
+// as opposed to serverless-mysql
 // from the CloudWatch logs
 //"errorId": "TimeoutError!$Function execution duration going to exceeded configured timeout limit.",
 //"errorFatal": true,

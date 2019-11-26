@@ -84,6 +84,7 @@ functions:
           parameters: 
             paths: 
               userId: true
+    timeout: 29
 
   validateFunc:
     handler: handlers/validate.validateFunc
@@ -91,6 +92,7 @@ functions:
     - http:
         path: validate
         method: post
+    timeout: 29
 
   generateFunc:
     handler: handlers/generate.generateFunc
@@ -98,6 +100,7 @@ functions:
     - http:
         path: generate
         method: get
+    timeout: 29
 
 
 
