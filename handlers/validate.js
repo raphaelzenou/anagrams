@@ -1,9 +1,9 @@
 "use strict";
 const request = require('request');
 const config = require('../config.json');
-const compare = require('../stringcompare.js');
 
-// Require and initialize outside of the main handler
+// ********** DB CONFIG ********** 
+
 const mysql = require('serverless-mysql')({
   config: {
     host     : config.dbhost,
@@ -13,10 +13,19 @@ const mysql = require('serverless-mysql')({
   }
 });
 
+// ********** ANAGRAMS VALIDATOR **********  
+
+function stringCompare (string1, string2) {
+  var sorted1 = string1.split("").sort().join("");
+  var sorted2 = string2.split("").sort().join("");
+  return(sorted1 === sorted2);
+}
+
 // ********** API RESULT ********** 
 
 // same function as for the generate handler
 // but without the random string output
+
 
 function apiCallFunc(string) {
     return new Promise((resolve) => {
@@ -28,6 +37,8 @@ function apiCallFunc(string) {
           });
     })
 }
+
+
 
 // ********** ASYNC API CALLER ********** 
 // similar function as for the generate handler
@@ -70,23 +81,33 @@ module.exports.validateFunc = async (event) => {
   let apiResponse = await apiGeneratorFunc(generatedString); // init
   console.log(apiResponse);
   let totalAnagrams = apiResponse.best;
-  console.log('All anagrams:');
+  console.log('All anagrams API generated:');
   console.log(totalAnagrams);
-  console.log('Number of anagrams:');
-  console.log(totalAnagrams.length);
-
-  // Here we can add a loop to double check that the values returned by this third party API
-  // Create a method that accepts two strings and 
-  // determines whether the strings are anagrams of each other.
-
   let totalScore = totalAnagrams.length;
+  console.log(totalScore);
+
+
+  // Here we double check that the values returned by this third party API
+  // as per the instructions
+  // just logging for now in case of bugs
+  console.log('Are they all anagrams though?');
+
+  var anCheck = true;
+  if (totalScore > 1) {
+    for (var i=0 ; i < totalScore-1 ; i++) {
+      if (!stringCompare(totalAnagrams[i], totalAnagrams[0])) {
+        anCheck = false;
+      }
+    }
+  } 
+  console.log(anCheck);
 
   // Second let's check the user's anagrams
 
   // As we made sure generatedString 
   // had same length anagrams
   // We know the totalAnagrams list is fair
-
+  
   anagrams.forEach(anagram => {
         if (totalAnagrams.includes(anagram)) {
           correct.push(anagram);
@@ -94,6 +115,7 @@ module.exports.validateFunc = async (event) => {
           incorrect.push(anagram);
         }
     });
+  
   console.log('User anagrams:');
   console.log(anagrams);
   console.log('Correct user anagrams:');
